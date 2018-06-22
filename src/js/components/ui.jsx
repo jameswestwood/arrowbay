@@ -15,6 +15,17 @@ import Footer from './footer/footer.jsx';
 
 import styles from './ui.css';
 
+type Dog = {
+  name:string,
+  appearance:string,
+  exercise:string,
+  personality:string,
+  feeding:string,
+  grooming:string,
+  updated:number,
+  added:number
+}
+
 type Props = {
   breakpoint:number
 }
@@ -32,17 +43,34 @@ class UI extends React.Component<Props, State>
     flat: true
   };
 
-  paths: {
-    [string]: {
-      path: string,
-      component: React.Element<any>
-    }
+  data: {
+    "dogs":Array<Dog>
   } = {
-    "welcome": {
-      path: "/",
-      component: <Nav />
+    "dogs" : [
+        {
+          name: "Spaniel",
+          path: "spaniel",
+          appearance: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          exercise: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          personality: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          feeding: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          grooming: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          updated: 1529659454,
+          added: 1529659454
+        },
+        {
+          name: "German Shepherd",
+          path: "german-shepherd",
+          appearance: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          exercise: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          personality: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          feeding: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          grooming: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          updated: 1529663054,
+          added: 1529663054
+        }
+      ]
     }
-  };
 
   componentDidMount()
   {
@@ -125,59 +153,31 @@ class UI extends React.Component<Props, State>
         <Header specifier="ui" paths={this.paths} />
         <Actions />
         <main className="ui__content">
-        {(() => {
-          switch(this.state.flat)
-          {
-          case false : // render single page app for higher resolutions
-
-          return <Route render={({ location }) => (
-                  <TransitionGroup component="div"
-                                   className="ui__container"
-                                   appear={true}>
-                    <CSSTransition key={location.pathname}
-                                    transitionAppear={true}
-                                    classNames="ui__section-"
-                                    onEnter={(el:HTMLElement) => {this.transitionSections(el);}}
-                                    timeout={this.transitionDuration}>
-                      <Switch location={location}>
-                        {(() => {
-
-                          const keys:Array<string> = Object.keys(this.paths);
-                          let routes:Array<React.Element<any>> = [];
-
-                          for(let i:number = 0; i < keys.length; i++)
-                          {
-                            routes.push(<Route exact={true}
-                                               path={this.paths[keys[i]].path}
-                                               render={() => <section className="ui__section" id={location.pathname}>{this.paths[keys[i]].component}</section>}
-                                               key={'route-' + (keys[i])} />);
-                          }
-
-                          return routes;
-
-                        })()}
-                      </Switch>
-                    </CSSTransition>
-                  </TransitionGroup>
-                )}/>;
-
-            case true :  // render flattened app for lower resolutions
-
-            const keys:Array<string> = Object.keys(this.paths);
-            let sections:Array<React$Node> = [];
-
-            for(let i:number = 0; i < keys.length; i++)
-            {
-              let section:React$Node = this.paths[keys[i]].component;
-
-              sections.push(<section id={keys[i]}
-                                 className="ui__section"
-                                 key={"section-" + (keys[i])}>{section}</section>);
-            }
-
-            return sections;
-          };
-        })()}
+          <Route render={({ location }) => (
+              <TransitionGroup component="div"
+                               className="ui__container"
+                               appear={true}>
+                <CSSTransition key={location.pathname}
+                               transitionAppear={true}
+                               classNames="ui__section-"
+                               onEnter={(el:HTMLElement) => {this.transitionSections(el);}}
+                               timeout={this.transitionDuration}>
+                    <Switch location={location}>
+                      // landing
+                      <Route exact={true}
+                             path="/"
+                             render={() => {
+                               return <Nav paths={
+                                        this.data.dogs.map((dog) => {
+                                           return {
+                                               name: dog.name,
+                                               path: dog.path
+                                           };
+                                        })
+                                      } />}} />
+                    </Switch>
+                </CSSTransition>
+            </TransitionGroup>)}/>;
         </main>
         <Footer specifier="ui__footer" />
       </div>
