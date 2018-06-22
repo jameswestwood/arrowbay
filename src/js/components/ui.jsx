@@ -11,17 +11,21 @@ import Utilities from '../classes/utilities.js';
 import Header from './header/header.jsx';
 import Nav from './nav/nav.jsx';
 import Actions from './actions/actions.jsx';
+import About from './about/about.jsx';
 import Footer from './footer/footer.jsx';
 
 import styles from './ui.css';
 
-type Dog = {
+export type Dog = {
   name:string,
-  appearance:string,
-  exercise:string,
-  personality:string,
-  feeding:string,
-  grooming:string,
+  id:string,
+  info: {
+    appearance:string,
+    exercise:string,
+    personality:string,
+    feeding:string,
+    grooming:string
+  },
   updated:number,
   added:number
 }
@@ -49,23 +53,27 @@ class UI extends React.Component<Props, State>
     "dogs" : [
         {
           name: "Spaniel",
-          path: "spaniel",
-          appearance: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          exercise: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          personality: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          feeding: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          grooming: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          id: "spaniel",
+          info: {
+            appearance: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            exercise: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            personality: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            feeding: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            grooming: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          },
           updated: 1529659454,
           added: 1529659454
         },
         {
           name: "German Shepherd",
-          path: "german-shepherd",
-          appearance: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          exercise: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          personality: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          feeding: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          grooming: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          id: "german-shepherd",
+          info: {
+            appearance: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            exercise: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            personality: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            feeding: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            grooming: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
           updated: 1529663054,
           added: 1529663054
         }
@@ -134,6 +142,7 @@ class UI extends React.Component<Props, State>
                                onEnter={(el:HTMLElement) => {this.transitionSections(el);}}
                                timeout={this.transitionDuration}>
                     <Switch location={location}>
+                       /////////////////////////
                       // landing
                       <Route exact={true}
                              path="/"
@@ -142,10 +151,23 @@ class UI extends React.Component<Props, State>
                                         this.data.dogs.map((dog) => {
                                            return {
                                                name: dog.name,
-                                               path: dog.path
+                                               path: dog.id
                                            };
                                         })
                                       } />}} />
+                       /////////////////////////
+                      // about
+                      <Route exact={true}
+                             path="/dog/:id"
+                             render={({match}) => {
+
+                                const thisDog:Dog = this.data.dogs.filter(function(dog) {
+                                  return dog.id === match.params.id;
+                                });
+
+                                return <About dog={thisDog} />
+                             }
+                            } />
                     </Switch>
                 </CSSTransition>
             </TransitionGroup>)}/>;
