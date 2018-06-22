@@ -72,35 +72,6 @@ class UI extends React.Component<Props, State>
       ]
     }
 
-  componentDidMount()
-  {
-    // initial layout
-    this.manageLayout(Utilities.getWidth(document));
-
-    // update layout on resize if required
-    window.addEventListener('resize', (event:EventListener) => {
-
-      this.manageLayout(Utilities.getWidth(document));
-    });
-  }
-
-  manageLayout(currentSize:number)
-  {
-    if(this.state.flat === false
-      && currentSize <= this.props.breakpoint){
-
-      this.setState({
-        flat: true
-      });
-    }
-    else if(this.state.flat === true
-            && currentSize > this.props.breakpoint){
-
-      this.setState({
-        flat: false
-      });
-    };
-  }
 
   async transitionSections(nextSection:HTMLElement){
 
