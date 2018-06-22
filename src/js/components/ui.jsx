@@ -10,8 +10,7 @@ import Utilities from '../classes/utilities.js';
 
 import Header from './header/header.jsx';
 import Nav from './nav/nav.jsx';
-import Welcome from './welcome/welcome.jsx';
-import About from './about/about.jsx';
+import Actions from './actions/actions.jsx';
 import Footer from './footer/footer.jsx';
 
 import styles from './ui.css';
@@ -41,11 +40,7 @@ class UI extends React.Component<Props, State>
   } = {
     "welcome": {
       path: "/",
-      component: <Welcome />
-    },
-    "about" : {
-      path: "/about",
-      component: <About />
+      component: <Nav />
     }
   };
 
@@ -128,6 +123,7 @@ class UI extends React.Component<Props, State>
     return (
       <div className={"ui" + (!this.state.flat ? ' ui--layered' : '')}>
         <Header specifier="ui" paths={this.paths} />
+        <Actions />
         <main className="ui__content">
         {(() => {
           switch(this.state.flat)

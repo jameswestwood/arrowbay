@@ -6,19 +6,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.4rem var(--horizontal-padding);
+  padding: 0.4rem;
 
   font-size: 0.4rem;
 
   &:before{
-    content: '';
-    position: absolute;
-    left:var(--horizontal-padding);
-    right: var(--horizontal-padding);
-    top:0;
-    height: 2px;
+    @mixin divider;
 
-    background-color: color(var(--primary-color) alpha(15%));
+    top:0;
   }
 
   &__icon-btn{

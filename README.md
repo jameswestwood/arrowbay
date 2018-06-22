@@ -1,13 +1,7 @@
 
-This is a lightweight template and boilerplate for a responsive single page app that uses both React and PostCSS.
 
-It comes ready to go with base styling and example code.
 
-**[DEMO](https://jameswestwood.github.io/webpack-react-postcss-boilerplate/).**
-
-## Bespoke implementations of this boilerplate.
-
-If you are looking for a bespoke design and/or functionality drop me a line at [james@autotelic.io](mailto:james@autotelic.io).
+https://reactstrap.github.io/
 
 ## Running
 

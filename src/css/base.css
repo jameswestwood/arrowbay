@@ -2,6 +2,7 @@
 @import "./libs/caesar.css";
 @import "config.css";
 @import "type.css";
+@import './libs/bootstrap.css';
 
 *, *:before, *:after {
   box-sizing: inherit;

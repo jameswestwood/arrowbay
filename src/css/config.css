@@ -33,4 +33,13 @@
 	@custom-media --ie11-only-hack (-ms-high-contrast:none);
 	@custom-media --edge-only-hack (-ms-accelerator:true);
 	@custom-media --mobile-breakpoint (min-width:480px);
+
+	@define-mixin divider{
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background-color: color(var(--primary-color) alpha(15%));
+	}
 }

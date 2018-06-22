@@ -109,8 +109,8 @@ module.exports = {
         verbose:  true
       }),
       new HtmlWebpackPlugin({
-        title: 'insert title here',
-        description: 'insert description here',
+        title: 'Dogopedia',
+        description: 'Dogopedia, the free encyclopedia',
         author: 'James Westwood',
         keywords: '----, ----, ----, ----',
         hash: true,

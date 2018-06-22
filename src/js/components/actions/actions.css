@@ -1,0 +1,19 @@
+@import "../../../css/config.css";
+
+.actions{
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 10vh;
+  padding: .4rem 0;
+
+  &:before{
+    @mixin divider;
+
+    bottom:0;
+  }
+
+  &__action{
+    margin-right: 0.2rem;
+  }
+}
