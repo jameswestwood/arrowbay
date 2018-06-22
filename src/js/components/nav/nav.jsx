@@ -9,6 +9,7 @@ import styles from './nav.css';
 
 type Props = {
   paths:Array<{}>,
+  specifier:string,
   match:withRouter.Match | void,
   location:withRouter.Location | void,
   history:withRouter.History | void
@@ -26,7 +27,7 @@ class Nav extends React.Component<Props>
     const { match, location, history } = this.props
 
     return (
-      <nav className="nav">
+      <nav className={"nav" + (this.props.specifier !== undefined ? ' ' + this.props.specifier : '')}>
         {
           this.props.paths.map((path) =>
             <Link to={"/dog/" + (path.path)} className="nav__link">{path.name}</Link>

@@ -1,3 +1,15 @@
-.landing{
+@import "../../../css/content.css";
 
+.landing{
+  display: flex;
+
+  &__nav{
+    display: inline-block;
+    width:10rem;
+    min-width: 10rem;
+  }
+
+  &__intro{
+    display: inline-block;
+  }
 }
