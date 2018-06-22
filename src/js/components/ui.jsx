@@ -9,10 +9,11 @@ import anime from 'animejs';
 import Utilities from '../classes/utilities.js';
 
 import Header from './header/header.jsx';
-import Nav from './nav/nav.jsx';
-import Actions from './actions/actions.jsx';
-import About from './about/about.jsx';
 import Footer from './footer/footer.jsx';
+
+// views
+import Landing from './landing/landing.jsx';
+import About from './about/about.jsx';
 
 import styles from './ui.css';
 
@@ -156,7 +157,6 @@ class UI extends React.Component<Props, State>
     return (
       <div className="ui">
         <Header specifier="ui" />
-        <Actions />
         <main className="ui__content">
           <Route render={({ location }) => (
               <TransitionGroup component="div"
@@ -173,7 +173,7 @@ class UI extends React.Component<Props, State>
                       <Route exact={true}
                              path="/"
                              render={() => {
-                               return <Nav paths={
+                               return <Landing links={
                                         this.data.dogs.map((dog) => {
                                            return {
                                                name: dog.name,
