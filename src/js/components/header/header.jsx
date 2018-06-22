@@ -4,21 +4,13 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 
-import Nav from '../nav/nav.jsx';
-
 import styles from './header.css';
 
-type Props = {
-  paths:{},
-  current?:string,
-  specifier?:string
-}
-
-class Header extends React.Component<Props>
+class Header extends React.Component<{}>
 {
   render(){
     return (
-      <header className={"header" + (this.props.specifier !== undefined ? ' ' + this.props.specifier + '__header' : '')}>
+      <header className="header">
         <Link to="/" className="header__link">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0" y="0"
           	 viewBox="0 100 439.741 240" className="header__logo">

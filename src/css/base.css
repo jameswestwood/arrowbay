@@ -10,7 +10,7 @@
 }
 
 html{
-	padding: 0;
+	padding: 0 10vw;
 	margin: 0;
 	font-family: var(--text-font);
   -webkit-font-smoothing: antialiased;

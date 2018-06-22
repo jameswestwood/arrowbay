@@ -76,6 +76,32 @@ class UI extends React.Component<Props, State>
           },
           updated: 1529663054,
           added: 1529663054
+        },
+        {
+          name: "Poodle",
+          id: "poodle",
+          info: {
+            appearance: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            exercise: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            personality: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            feeding: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            grooming: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          },
+          updated: 1529665804,
+          added: 1529665804
+        },
+        {
+          name: "Dachshund",
+          id: "dachshund",
+          info: {
+            appearance: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            exercise: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            personality: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            feeding: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            grooming: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          updated: 1529752204,
+          added: 1529752204
         }
       ]
     }
@@ -128,8 +154,8 @@ class UI extends React.Component<Props, State>
 
   render(){
     return (
-      <div className={"ui" + (!this.state.flat ? ' ui--layered' : '')}>
-        <Header specifier="ui" paths={this.paths} />
+      <div className="ui">
+        <Header specifier="ui" />
         <Actions />
         <main className="ui__content">
           <Route render={({ location }) => (

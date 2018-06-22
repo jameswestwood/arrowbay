@@ -6,41 +6,18 @@
 .ui{
   @mixin fadeIn 1s;
 
-  &--layered{
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  max-width: var(--maximum-viewport-width)px;
+  min-height: 100vh;
+  margin: 0 auto;
 
-    max-width: var(--maximum-viewport-width)px;
-    min-height: 100vh;
-    margin: 0 auto;
-
-    & .ui__content{
-      position: relative;
-      display: flex;
-      align-items: center;
-      min-height: 70vh;
-    }
-
-    & .ui__section{
-      margin-bottom: 0;
-      min-height: 0;
-
-      &:nth-child(even){
-        background-color: transparent;
-      }
-    }
-
-    & .ui__header{
-      min-height: 10vh;
-    }
-
-    & .ui__nav{
-      visibility: visible;
-    }
+  & .ui__content{
+    position: relative;
+    min-height: 70vh;
   }
 
-  &__nav{
-    visibility: hidden;
+  &__header{
+    min-height: 5vh;
   }
 
   &__section{

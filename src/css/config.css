@@ -8,10 +8,10 @@
 	--horizontal-padding: 5vw;
 
 	/* colors */
-	--primary-color:#fff;
-	--secondary-color:#2b106b;
+	--primary-color:#000;
+	--secondary-color:#fff;
 
-	--background-color-a:color(color(var(--secondary-color) hue(+25)) lightness(40));
+	--background-color-a:var(--secondary-color);
 	--background-color-b:var(--secondary-color);
 
 	/* states */
