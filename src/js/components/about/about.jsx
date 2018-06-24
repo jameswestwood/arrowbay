@@ -13,6 +13,7 @@ type Props = {
 }
 
 type State = {
+  ready:boolean,
   edit:boolean, // are the field editable?
   create:boolean // is this a new item?
 }
@@ -31,6 +32,32 @@ class About extends React.Component<Props, State>
 
   componentDidMount()
   {
+    const dog:Dog = this.props.dog[0];
+
+    if(dog != null
+      && dog.info != null)
+      {
+        const initialFieldState:{} = {};
+
+        // add state dynamically for form fields
+        for (let key:string in dog.info) {
+
+          if (dog.info.hasOwnProperty(key)) {
+
+            initialFieldState[key] = dog.info[key].value;
+          }
+        }
+
+        // add name field
+        initialFieldState.name = dog.name.value;
+
+        this.setState(initialFieldState);
+
+    } else {
+
+      throw new Error("dog was not defined on mount");
+    }
+
     if(this.props.create === true)
     {
       this.setState({
@@ -64,11 +91,11 @@ class About extends React.Component<Props, State>
       // edit mode
       case true:
 
-      elements.push(<Button className="actions__action" color="danger" onClick={this.toggleEditMode.bind(this)}>Save</Button>)
+      elements.push(<Button className="actions__action" color="danger" onClick={this.saveDog.bind(this)}>Save</Button>)
 
       //
-      if(create === false)
-      {
+      if(create === false){
+
         elements.push(<Button className="actions__action" color="danger" onClick={this.toggleEditMode.bind(this)}>Cancel</Button>);
       }
 
@@ -76,6 +103,14 @@ class About extends React.Component<Props, State>
     }
 
     return elements;
+  }
+
+  handleChange(key:string, event) {
+
+    const updatedValue:{} = {};
+    updatedValue[key] = event.target.value;
+
+    this.setState(updatedValue);
   }
 
   renderContent(dog:Dog, edit:boolean, create:boolean):Array<React.Element>
@@ -90,7 +125,7 @@ class About extends React.Component<Props, State>
 
       elements.push(<div class="form-group">
                       <label for="dog-name">Dog Breed</label>
-                      <Input type="text" class="form-control" id="dog-name" placeholder="Dog Breed" />
+                      <Input type="text" class="form-control" id="dog-name" placeholder="Dog Breed" value={this.state.name} onChange={(e) => this.handleChange('name', e)} />
                       <small class="form-text text-muted">{dog.name.descriptor}</small>
                     </div>);
 
@@ -117,7 +152,7 @@ class About extends React.Component<Props, State>
 
           section = <div class="form-group">
                       <label for={key}>{key}</label>
-                      <Input type="textarea" class="form-control" id="dog-name" id={key}  value={dog.info[key].value} />
+                      <Input type="textarea" class="form-control" id="dog-name" id={key} value={this.state[key]} onChange={(e) => this.handleChange(key, e)} />
                       <small class="form-text text-muted">{dog.info[key].descriptor}</small>
                     </div>;
 
@@ -127,7 +162,7 @@ class About extends React.Component<Props, State>
 
           section = <React.Fragment>
                       <h3>{key}</h3>
-                      <span>{dog.info[key].value}</span>;
+                      <span>{this.state[key]}</span>;
                     </React.Fragment>;
 
           break;
@@ -138,6 +173,11 @@ class About extends React.Component<Props, State>
     }
 
     return elements;
+  }
+
+  saveDog()
+  {
+
   }
 
   render(){

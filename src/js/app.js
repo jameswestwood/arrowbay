@@ -17,7 +17,7 @@ window.onload = function () {
   {
     render(
         <HashRouter>
-          <UI breakpoint={600} />
+          <UI />
         </HashRouter>,
         appContainer
       );

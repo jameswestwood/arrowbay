@@ -22,20 +22,24 @@ import styles from './ui.css';
 
 export type Dog = {
   name:string,
-  id:string,
+  id:number,
+  path:string,
   info: {
     appearance:string,
     exercise:string,
     personality:string,
     feeding:string,
     grooming:string
-  },
-  updated:number,
-  added:number
+  }
 }
 
 // dog constructor
-export function Dog(name:string, appearance:string, exercise:string, personality:string, feeding:string, grooming:string):Dog
+export function Dog(name:string,
+                    appearance:string,
+                    exercise:string,
+                    personality:string,
+                    feeding:string,
+                    grooming:string):Dog
 {
   this.id = + new Date();
 
@@ -79,22 +83,10 @@ export function Dog(name:string, appearance:string, exercise:string, personality
   };
 }
 
-type Props = {
-  breakpoint:number
-}
-
-type State = {
-  flat:boolean
-}
-
-class UI extends React.Component<Props, State>
+class UI extends React.Component<{}>
 {
   currentSection:HTMLElement;
   transitionDuration:number = 300;
-
-  state:State = {
-    flat: true
-  };
 
   store;
 
