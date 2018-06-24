@@ -4,6 +4,9 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 import { Transition, CSSTransition, TransitionGroup } from 'react-transition-group';
+import { createStore } from 'redux';
+import { dogs } from '../reducers';
+import { addDog } from '../actions';
 import anime from 'animejs';
 
 import Utilities from '../classes/utilities.js';
@@ -31,6 +34,56 @@ export type Dog = {
   added:number
 }
 
+// dog constructor
+export function Dog(name:string, appearance:string, exercise:string, personality:string, feeding:string, grooming:string):Dog
+{
+  this.id = + new Date();
+
+  this.name = {
+    value:name,
+    descriptor:"The name of the breed."
+  };
+
+  this.path;
+
+  if(name != null
+    && typeof name === "string"){
+
+    this.path = name.replace(' ', '-').toLowerCase();
+
+  } else {
+
+    throw new Error("invalid item name passed");
+  }
+
+  this.info = {};
+
+  this.info.appearance = {
+    value: appearance,
+    descriptor:"The appearance of the dog."
+  };
+
+  this.info.exercise = {
+    value: appearance,
+    descriptor:"What is the dog's exercise routine?"
+  };
+
+  this.info.personality = {
+    value: appearance,
+    descriptor:"Describe the dogs temperament."
+  };
+
+  this.info.feeding = {
+    value: appearance,
+    descriptor:"What does the dog eat? How often does it eat?"
+  };
+
+  this.info.grooming = {
+    value: appearance,
+    descriptor:"How involved is the dogs grooming regeme?"
+  };
+}
+
 type Props = {
   breakpoint:number
 }
@@ -48,65 +101,28 @@ class UI extends React.Component<Props, State>
     flat: true
   };
 
-  data: {
-    "dogs":Array<Dog>
-  } = {
-    "dogs" : [
-        {
-          name: "Spaniel",
-          id: "spaniel",
-          info: {
-            appearance: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            exercise: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            personality: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            feeding: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            grooming: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          },
-          updated: 1529659454,
-          added: 1529659454
-        },
-        {
-          name: "German Shepherd",
-          id: "german-shepherd",
-          info: {
-            appearance: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            exercise: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            personality: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            feeding: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            grooming: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-          },
-          updated: 1529663054,
-          added: 1529663054
-        },
-        {
-          name: "Poodle",
-          id: "poodle",
-          info: {
-            appearance: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            exercise: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            personality: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            feeding: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            grooming: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          },
-          updated: 1529665804,
-          added: 1529665804
-        },
-        {
-          name: "Dachshund",
-          id: "dachshund",
-          info: {
-            appearance: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            exercise: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            personality: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            feeding: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            grooming: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-          },
-          updated: 1529752204,
-          added: 1529752204
-        }
-      ]
-    }
+  store;
 
+  constructor()
+  {
+    super();
+
+    this.store = createStore(dogs);
+
+    // testing
+    const unsubscribe = this.store.subscribe(() =>
+      console.log(this.store.getState())
+    );
+
+    const dachshund:Dog = new Dog("Dachshund",
+                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
+
+    this.store.dispatch(addDog(dachshund));
+  }
 
   async transitionSections(nextSection:HTMLElement){
 
@@ -174,10 +190,10 @@ class UI extends React.Component<Props, State>
                              path="/"
                              render={() => {
                                return <Landing links={
-                                        this.data.dogs.map((dog) => {
+                                        this.store.getState().dogs.map((dog) => {
                                            return {
-                                               name: dog.name,
-                                               path: dog.id
+                                               name: dog.name.value,
+                                               path: dog.path
                                            };
                                         })
                                       } />}} />
@@ -187,11 +203,11 @@ class UI extends React.Component<Props, State>
                              path="/dog/:id"
                              render={({match}) => {
 
-                                const thisDog:Dog = this.data.dogs.filter(function(dog) {
-                                  return dog.id === match.params.id;
-                                });
+                               const thisDog:Dog = this.store.getState().dogs.filter(function(dog) {
+                                  return dog.path === match.params.id;
+                               });
 
-                                return <About dog={thisDog} />
+                               return <About dog={thisDog} />
                              }
                             } />
                     </Switch>
