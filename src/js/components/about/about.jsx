@@ -8,7 +8,8 @@ import { Button, Input } from 'reactstrap';
 import type {Dog} from "../ui.jsx";
 
 type Props = {
-  dog:Array<Dog>
+  dog:Array<Dog>,
+  create:boolean
 }
 
 type State = {
@@ -25,6 +26,17 @@ class About extends React.Component<Props, State>
     this.state = {
       edit: false,
       create: false
+    }
+  }
+
+  componentDidMount()
+  {
+    if(this.props.create === true)
+    {
+      this.setState({
+        create: true,
+        edit: true
+      })
     }
   }
 
@@ -72,7 +84,7 @@ class About extends React.Component<Props, State>
 
     // title
 
-    switch(this.state.create)
+    switch(create)
     {
       case true:
 
@@ -141,5 +153,7 @@ class About extends React.Component<Props, State>
     );
   }
 }
+
+About.defaultProps = { create: false };
 
 export default About;

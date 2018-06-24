@@ -46,14 +46,9 @@ export function Dog(name:string, appearance:string, exercise:string, personality
 
   this.path;
 
-  if(name != null
-    && typeof name === "string"){
+  if(name != null){
 
     this.path = name.replace(' ', '-').toLowerCase();
-
-  } else {
-
-    throw new Error("invalid item name passed");
   }
 
   this.info = {};
@@ -184,8 +179,10 @@ class UI extends React.Component<Props, State>
                                onEnter={(el:HTMLElement) => {this.transitionSections(el);}}
                                timeout={this.transitionDuration}>
                     <Switch location={location}>
+
                        /////////////////////////
                       // landing
+
                       <Route exact={true}
                              path="/"
                              render={() => {
@@ -194,11 +191,27 @@ class UI extends React.Component<Props, State>
                                            return {
                                                name: dog.name.value,
                                                path: dog.path
-                                           };
+                                           }
                                         })
                                       } />}} />
+
+
+                      /////////////////////////
+                     // new
+
+                     <Route exact={true}
+                            path="/dog/new"
+                            render={({match}) => {
+
+                              const newDog:Dog = new Dog();
+
+                              return <About dog={[newDog]} create={true} />
+                            }
+                           } />
+
                        /////////////////////////
                       // about
+
                       <Route exact={true}
                              path="/dog/:id"
                              render={({match}) => {
@@ -210,9 +223,10 @@ class UI extends React.Component<Props, State>
                                return <About dog={thisDog} />
                              }
                             } />
+
                     </Switch>
                 </CSSTransition>
-            </TransitionGroup>)}/>;
+            </TransitionGroup>)}/>
         </main>
         <Footer specifier="ui__footer" />
       </div>
