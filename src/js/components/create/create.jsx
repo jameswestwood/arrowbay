@@ -4,6 +4,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { connect, dispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import history from '../../history'
 
 import { Button, Input } from 'reactstrap';
 
@@ -76,6 +77,7 @@ class Create extends React.Component<Props, State>
           <small className="form-text text-muted">The name of the breed.</small>
         </div>
         <Button disabled={!this.state.valid} className="actions__action" color="danger" onClick={() => this.setNewDog()}>Save</Button>
+        <Button className="actions__action" color="danger" onClick={() => history.push('/')}>Cancel</Button>
       </div>
     );
   }
