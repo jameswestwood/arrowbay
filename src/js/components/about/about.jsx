@@ -4,7 +4,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { connect, dispatch } from 'react-redux';
 
-import { Button, Input } from 'reactstrap';
+import { Button, Input, Alert } from 'reactstrap';
 
 import { editDog } from '../../actions';
 import type { Dog } from "../app.jsx";
@@ -14,7 +14,8 @@ type Props = {
 }
 
 type State = {
-  edit:boolean // are the field editable?
+  edit:boolean,
+  success:boolean // was the edit successful?
 }
 
 class About extends React.Component<Props, State>
@@ -158,16 +159,22 @@ class About extends React.Component<Props, State>
   {
     this.props.dispatchEditedDog(updatedDog);
 
-    // wait for response
+    // NOTE - wait here for response that was saved to server successfully
 
     this.setState({
-      edit:false
+      edit:false,
+      success:true
     })
   }
 
   render(){
     return (
       <div className="about content">
+        { this.state.success === true &&
+        <Alert color="success" className="toast">
+          Your update was saved.
+        </Alert>
+        }
         { this.renderContent(this.props.dog[0], this.state.edit, this.state.create) }
         <div className="about__actions">
           { this.renderActions(this.state.edit, this.state.create) }
