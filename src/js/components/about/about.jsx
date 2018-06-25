@@ -9,6 +9,8 @@ import { Button, Input, Alert, FormGroup, Label } from 'reactstrap';
 import { editDog } from '../../actions';
 import type { Dog } from "../app.jsx";
 
+import styles from './about.css';
+
 type Props = {
   dog:Array<Dog>
 }
@@ -78,12 +80,18 @@ class About extends React.Component<Props, State>
       case true:
 
       elements.push(<Button key="save-btn" className="actions__action" color="primary" onClick={() => this.setUpdatedDog(this.getDog())}>Save</Button>)
-      elements.push(<Button key="cancel-btn" className="actions__action" color="secondary" onClick={() => this.setState({edit:false})}>Cancel</Button>)
+      elements.push(<Button key="cancel-btn" className="actions__action" color="secondary" onClick={() => this.cancelEdit()}>Cancel</Button>)
 
       break;
     }
 
     return elements;
+  }
+
+  cancelEdit(){
+
+    this.setState({edit:false});
+    this.resetFields();
   }
 
   handleChange(key:string, event) {
@@ -99,10 +107,9 @@ class About extends React.Component<Props, State>
     let elements:Array<HTMLElement> = [];
 
     // title
-    elements.push(<h2 key={"heading"}>{dog.name}</h2>);
+    elements.push(<h2 className="about__heading" key={"heading"}>{dog.name}</h2>);
 
     // sections
-
     for (let key:string in dog.info) {
 
       if (dog.info.hasOwnProperty(key)) {
@@ -114,28 +121,51 @@ class About extends React.Component<Props, State>
           case true:
 
           section = <FormGroup>
-                      <Label htmlFor={key}>{key}</Label>
-                      <Input type="textarea" className="form-control" id="dog-name" id={key} value={this.state[key]} onChange={(e) => this.handleChange(key, e)} />
-                      <small className="form-text text-muted">{dog.info[key].descriptor}</small>
-                    </FormGroup>;
+                      <Input type="textarea"
+                             className="about__input form-control"
+                             id={key}
+                             value={this.state[key]}
+                             onChange={(e) => this.handleChange(key, e)} />
+                      <small className="about__description form-text">{dog.info[key].descriptor}</small>
+                    </FormGroup>
 
           break;
 
           case false:
 
-          section = <React.Fragment>
-                      <h3>{key}</h3>
-                      <span>{this.state[key]}</span>;
-                    </React.Fragment>;
+          section = <div>
+                      {this.state[key]}
+                    </div>
 
           break;
         }
 
-        elements.push(<section className="about__section" key={(key) + "-section"}>{section}</section>);
+        elements.push(<section className={"about__section" + (!this.state.edit ? " about__section--static" : "")} key={(key) + "-section"}>
+                        <h3 className="about__sub-heading">{key}</h3>
+                        {section}
+                      </section>);
       }
     }
 
     return elements;
+  }
+
+  resetFields()
+  {
+    // clone current dog object
+    let currentDog:Dog = Object.assign({}, this.props.dog[0]);
+    let newInputState = {};
+
+    // update new dog object with form field values
+    for (let key:string in currentDog.info) {
+
+      if (currentDog.info.hasOwnProperty(key)) {
+
+        newInputState[key] = currentDog.info[key].value;
+      }
+    }
+
+    this.setState(newInputState);
   }
 
   getDog():Dog

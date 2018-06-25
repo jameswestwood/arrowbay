@@ -21,3 +21,11 @@ html{
   // https://css-tricks.com/snippets/css/fluid-typography/
   //font-size: calc(var(--minimum-font-size)px + (var(--maximum-font-size) - var(--minimum-font-size)) * ((100vw - var(--minimum-viewport-width)px) / (var(--maximum-viewport-width) - var(--minimum-viewport-width))));
 }
+
+h2{
+  opacity: 0.9;
+}
+
+h3{
+  opacity: 0.8;
+}

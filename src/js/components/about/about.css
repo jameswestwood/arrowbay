@@ -1,0 +1,46 @@
+@import "../../../css/config.css";
+@import "../../../css/libs/caesar.css";
+
+.about{
+  &__heading{
+    position: relative;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+  }
+
+  &__sub-heading{
+    text-transform: capitalize;
+  }
+
+  &__section{
+    margin-bottom: 2rem;
+
+    transition: 0.25s var(--easeOutQuad);
+
+    &--static{
+      & .about__description{
+        opacity: 0;
+        height:auto;
+      }
+
+      & .about__input:disabled{
+        padding: 0;
+        background-color: transparent;
+        border: none;
+      }
+    }
+  }
+
+  &__input,
+  &__description{
+    transition: 0.25s var(--easeOutQuad) !important;
+  }
+
+  &__description{
+    opacity: 1;
+  }
+
+  &__actions{
+    margin-top:2rem;
+  }
+}
