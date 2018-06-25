@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { withRouter, Link } from 'react-router-dom';
-import { FormGroup, Label, Input } from 'reactstrap';
+import { FormGroup, Label, Input, ListGroup, ListGroupItem  } from 'reactstrap';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import history from '../../history'
@@ -35,9 +35,13 @@ class Nav extends React.Component<Props>
 
     return (
       <nav className={"nav" + (this.props.specifier !== undefined ? ' ' + this.props.specifier : '')}>
-        {this.props.paths.map((path) =>
-            <Link key={path.path} to={"/dog/" + (path.path)} className="nav__link">{path.name}</Link>
+        <ListGroup>
+          {this.props.paths.map((path) =>
+            <ListGroupItem action>
+              <Link key={path.path} to={"/dog/" + (path.path)}>{path.name}</Link>
+            </ListGroupItem>
         )}
+        </ListGroup>
         <FormGroup>
           <Label htmlFor="exampleSelect">Dogs</Label>
           <Input defaultValue="" type="select" name="select" id="exampleSelect" onChange={(e) => this.handleChange(e)}>
