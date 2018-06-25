@@ -14,9 +14,7 @@ import { Dog } from "../ui.jsx";
 
 type State = {
   name:string,
-  valid:boolean,
-  success:boolean,
-  path:string
+  valid:boolean
 }
 
 class Create extends React.Component<Props, State>
@@ -27,8 +25,7 @@ class Create extends React.Component<Props, State>
 
     this.state = {
       name: '',
-      valid: false,
-      success: false
+      valid: false
     }
   }
 
@@ -56,18 +53,10 @@ class Create extends React.Component<Props, State>
 
     this.props.dispatchNewDog(newDog);
 
-    this.setState({
-      path: newDog.path,
-      success: true
-    });
+    history.push('/dog/' + newDog.path);
   }
 
   render(){
-    if (this.state.success) {
-
-      return <Redirect push to={"/dog/" + (this.state.path)} />;
-    }
-
     return (
       <div className="create">
         <h2>Add a new dog</h2>
