@@ -14,17 +14,20 @@ html{
 	padding: 0 10vw;
 	margin: 0;
   -webkit-font-smoothing: antialiased;
-
   box-sizing: border-box;
 
-  color: var(--type-color-light);
+  background-color: var(--background-color);
 
   // https://css-tricks.com/snippets/css/fluid-typography/
   //font-size: calc(var(--minimum-font-size)px + (var(--maximum-font-size) - var(--minimum-font-size)) * ((100vw - var(--minimum-viewport-width)px) / (var(--maximum-viewport-width) - var(--minimum-viewport-width))));
 }
 
-h2{
-  opacity: 0.9;
+body{
+  background-color: transparent;
+}
+
+h1, h2, h3{
+  font-weight: bold;
 }
 
 h3{

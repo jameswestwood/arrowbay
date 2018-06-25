@@ -3,12 +3,14 @@
   --maximum-font-size:30;
 
   --minimum-viewport-width:320;
-  --maximum-viewport-width:1200;
+  --maximum-viewport-width:1000;
 
 	--horizontal-padding: 5vw;
 
 	--primary-color:#17141f;
 	--secondary-color:#fff;
+
+	--background-color:#f9f9f9;
 
 	/* media queries */
 	@custom-media --ie11-only-hack (-ms-high-contrast:none);
@@ -21,6 +23,6 @@
 		left: 0;
 		right: 0;
 		height: 2px;
-		background-color: color(var(--primary-color) alpha(15%));
+		background-color: color(var(--primary-color) alpha(50%));
 	}
 }

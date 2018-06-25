@@ -7,12 +7,6 @@
   justify-content: space-between;
   padding: 0.4rem 0;
 
-  &:before{
-    @mixin divider;
-
-    bottom:0;
-  }
-
   &__logo{
     display: inline-block;
     width:4rem;
