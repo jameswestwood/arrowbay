@@ -16,6 +16,7 @@ import Footer from './footer/footer.jsx';
 // views
 import Landing from './landing/landing.jsx';
 import About from './about/about.jsx';
+import Create from './create/create.jsx';
 
 import styles from './ui.css';
 
@@ -42,10 +43,7 @@ export function Dog(name:string,
 {
   this.id = + new Date();
 
-  this.name = {
-    value:name,
-    descriptor:"The name of the breed."
-  };
+  this.name = name;
 
   this.path;
 
@@ -157,7 +155,7 @@ class UI extends React.Component<{}>
                                return <Landing links={
                                         this.props.dogs.map((dog) => {
                                            return {
-                                               name: dog.name.value,
+                                               name: dog.name,
                                                path: dog.path
                                            }
                                         })
@@ -171,10 +169,7 @@ class UI extends React.Component<{}>
                             path="/dog/new"
                             render={({match}) => {
 
-                              // pass new empty dog object
-                              const newDog:Dog = new Dog();
-
-                              return <About dog={[newDog]} create={true} />
+                              return <Create />
                             }
                            } />
 
