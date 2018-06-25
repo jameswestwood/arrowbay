@@ -44,9 +44,6 @@ class About extends React.Component<Props, State>
           }
         }
 
-        // add name field
-        initialFieldState.name = dog.name.value;
-
         this.setState(initialFieldState);
 
     } else {
@@ -72,15 +69,15 @@ class About extends React.Component<Props, State>
     {
       case false:
 
-      elements.push(<Button className="actions__action" color="danger" onClick={() => this.setState({edit:true})}>Edit</Button>);
+      elements.push(<Button className="actions__action" color="primary" onClick={() => this.setState({edit:true})}>Edit</Button>);
 
       break;
 
       // edit mode
       case true:
 
-      elements.push(<Button className="actions__action" color="danger" onClick={() => this.setUpdatedDog(this.getDog())}>Save</Button>)
-      elements.push(<Button className="actions__action" color="danger" onClick={() => this.setState({edit:false})}>Cancel</Button>)
+      elements.push(<Button className="actions__action" color="primary" onClick={() => this.setUpdatedDog(this.getDog())}>Save</Button>)
+      elements.push(<Button className="actions__action" color="secondary" onClick={() => this.setState({edit:false})}>Cancel</Button>)
 
       break;
     }
