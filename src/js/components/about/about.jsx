@@ -4,7 +4,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { connect, dispatch } from 'react-redux';
 
-import { Button, Input, Alert } from 'reactstrap';
+import { Button, Input, Alert, FormGroup, Label } from 'reactstrap';
 
 import { editDog } from '../../actions';
 import type { Dog } from "../app.jsx";
@@ -70,15 +70,15 @@ class About extends React.Component<Props, State>
     {
       case false:
 
-      elements.push(<Button className="actions__action" color="primary" onClick={() => this.setState({edit:true})}>Edit</Button>);
+      elements.push(<Button key="edit-btn" className="actions__action" color="primary" onClick={() => this.setState({edit:true})}>Edit</Button>);
 
       break;
 
       // edit mode
       case true:
 
-      elements.push(<Button className="actions__action" color="primary" onClick={() => this.setUpdatedDog(this.getDog())}>Save</Button>)
-      elements.push(<Button className="actions__action" color="secondary" onClick={() => this.setState({edit:false})}>Cancel</Button>)
+      elements.push(<Button key="save-btn" className="actions__action" color="primary" onClick={() => this.setUpdatedDog(this.getDog())}>Save</Button>)
+      elements.push(<Button key="cancel-btn" className="actions__action" color="secondary" onClick={() => this.setState({edit:false})}>Cancel</Button>)
 
       break;
     }
@@ -99,7 +99,7 @@ class About extends React.Component<Props, State>
     let elements:Array<HTMLElement> = [];
 
     // title
-    elements.push(<h2>{dog.name}</h2>);
+    elements.push(<h2 key={"heading"}>{dog.name}</h2>);
 
     // sections
 
@@ -113,11 +113,11 @@ class About extends React.Component<Props, State>
         {
           case true:
 
-          section = <div className="form-group">
-                      <label for={key}>{key}</label>
+          section = <FormGroup>
+                      <Label htmlFor={key}>{key}</Label>
                       <Input type="textarea" className="form-control" id="dog-name" id={key} value={this.state[key]} onChange={(e) => this.handleChange(key, e)} />
                       <small className="form-text text-muted">{dog.info[key].descriptor}</small>
-                    </div>;
+                    </FormGroup>;
 
           break;
 
@@ -131,7 +131,7 @@ class About extends React.Component<Props, State>
           break;
         }
 
-        elements.push(<section className="about__section">{section}</section>);
+        elements.push(<section className="about__section" key={(key) + "-section"}>{section}</section>);
       }
     }
 
@@ -171,11 +171,13 @@ class About extends React.Component<Props, State>
     return (
       <div className="about content">
         { this.state.success === true &&
-        <Alert color="success" className="toast">
+        <Alert color="success">
           Your update was saved.
         </Alert>
         }
+
         { this.renderContent(this.props.dog[0], this.state.edit, this.state.create) }
+
         <div className="about__actions">
           { this.renderActions(this.state.edit, this.state.create) }
         </div>

@@ -6,7 +6,6 @@ import { HashRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { dogs } from './reducers';
-import history from './history'
 
 import styles from '../css/base.css';
 import critical from '../css/critical.crit.css';
@@ -23,7 +22,7 @@ window.onload = function () {
 
     render(
           <Provider store={store}>
-            <HashRouter history={history}>
+            <HashRouter>
               <App />
             </HashRouter>
           </Provider>,

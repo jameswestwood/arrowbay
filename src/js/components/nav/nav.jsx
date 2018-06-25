@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { withRouter, Link } from 'react-router-dom';
-import { Input } from 'reactstrap';
+import { FormGroup, Label, Input } from 'reactstrap';
 import PropTypes from 'prop-types';
 import anime from 'animejs';
 import history from '../../history'
@@ -36,17 +36,17 @@ class Nav extends React.Component<Props>
     return (
       <nav className={"nav" + (this.props.specifier !== undefined ? ' ' + this.props.specifier : '')}>
         {this.props.paths.map((path) =>
-            <Link to={"/dog/" + (path.path)} className="nav__link">{path.name}</Link>
+            <Link key={path.path} to={"/dog/" + (path.path)} className="nav__link">{path.name}</Link>
         )}
-        <formgroup>
-          <label for="exampleSelect">Dogs</label>
-          <Input type="select" name="select" id="exampleSelect" onChange={(e) => this.handleChange(e)}>
-            <option value="" selected disabled hidden>Select a dog</option>
+        <FormGroup>
+          <Label htmlFor="exampleSelect">Dogs</Label>
+          <Input defaultValue="" type="select" name="select" id="exampleSelect" onChange={(e) => this.handleChange(e)}>
+            <option value="" disabled hidden>Select a dog</option>
             {this.props.paths.map((path) =>
-              <option value={"/dog/" + (path.path)}>{path.name}</option>
+              <option key={path.path} value={"/dog/" + (path.path)}>{path.name}</option>
             )}
           </Input>
-        </formgroup>
+        </FormGroup>
       </nav>
     );
   }
