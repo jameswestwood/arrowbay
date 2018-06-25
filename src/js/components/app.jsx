@@ -189,6 +189,11 @@ class App extends React.Component<{}>
                              }
                             } />
 
+                        /////////////////////////
+                       // 404
+
+                      <Route render={() => <h2>404</h2>} />
+
                     </Switch>
                 </CSSTransition>
             </TransitionGroup>)}/>
