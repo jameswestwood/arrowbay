@@ -1,6 +1,6 @@
 /* @flow */
 import { Dog } from './components/ui.jsx';
-import { ADD_DOG } from './actions';
+import { ADD_DOG, EDIT_DOG } from './actions';
 
  ///////////////////////////////////////
 // (Would be pulled from server)
@@ -35,6 +35,13 @@ export function dogs(state = initialData, action) {
     case ADD_DOG:
       return Object.assign({}, state, {
         dogs: [...state.dogs, action.newDog]
+      })
+
+    case EDIT_DOG:
+      return Object.assign({}, state, {
+        dogs: state.dogs.map(
+               (dog) => dog.id === action.updatedDog.id ? action.updatedDog : dog
+        )
       })
 
     default:

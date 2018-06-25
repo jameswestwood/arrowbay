@@ -2,9 +2,11 @@
 
 import * as React from 'react';
 import { render } from 'react-dom';
+import { connect } from 'react-redux';
 
 import { Button, Input } from 'reactstrap';
 
+import { addDog, editDog } from '../../actions';
 import type {Dog} from "../ui.jsx";
 
 type Props = {
@@ -13,7 +15,6 @@ type Props = {
 }
 
 type State = {
-  ready:boolean,
   edit:boolean, // are the field editable?
   create:boolean // is this a new item?
 }
@@ -84,19 +85,19 @@ class About extends React.Component<Props, State>
     {
       case false:
 
-      elements.push(<Button className="actions__action" color="danger" onClick={this.toggleEditMode.bind(this)}>Edit</Button>);
+      elements.push(<Button className="actions__action" color="danger" onClick={() => this.setState({edit:true})}>Edit</Button>);
 
       break;
 
       // edit mode
       case true:
 
-      elements.push(<Button className="actions__action" color="danger" onClick={this.saveDog.bind(this)}>Save</Button>)
+      elements.push(<Button className="actions__action" color="danger" onClick={() => this.setUpdatedDog(this.getUpdatedDog())}>Save</Button>)
 
       //
       if(create === false){
 
-        elements.push(<Button className="actions__action" color="danger" onClick={this.toggleEditMode.bind(this)}>Cancel</Button>);
+        elements.push(<Button className="actions__action" color="danger" onClick={() => this.setState({edit:false})}>Cancel</Button>);
       }
 
       break;
@@ -175,9 +176,34 @@ class About extends React.Component<Props, State>
     return elements;
   }
 
-  saveDog()
+  getUpdatedDog():Dog
   {
+    // clone current dog object
+    let updatedDog:Dog = Object.assign({}, this.props.dog[0]);
 
+    updatedDog.name.value = this.state.name;
+
+    // update new dog object with form field values
+    for (let key:string in updatedDog.info) {
+
+      if (updatedDog.info.hasOwnProperty(key)) {
+
+        updatedDog.info[key].value = this.state[key];
+      }
+    }
+
+    return updatedDog;
+  }
+
+  async setUpdatedDog(updatedDog:Dog)
+  {
+    editDog(this.getUpdatedDog());
+
+    // wait for response
+
+    this.setState({
+      edit:false
+    })
   }
 
   render(){
@@ -194,6 +220,7 @@ class About extends React.Component<Props, State>
   }
 }
 
+// set default props
 About.defaultProps = { create: false };
 
 export default About;

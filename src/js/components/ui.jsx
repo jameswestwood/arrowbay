@@ -2,10 +2,9 @@
 
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Transition, CSSTransition, TransitionGroup } from 'react-transition-group';
-import { createStore } from 'redux';
-import { dogs } from '../reducers';
 import { addDog } from '../actions';
 import anime from 'animejs';
 
@@ -88,29 +87,6 @@ class UI extends React.Component<{}>
   currentSection:HTMLElement;
   transitionDuration:number = 300;
 
-  store;
-
-  constructor()
-  {
-    super();
-
-    this.store = createStore(dogs);
-
-    // testing
-    const unsubscribe = this.store.subscribe(() =>
-      console.log(this.store.getState())
-    );
-
-    const dachshund:Dog = new Dog("Dachshund",
-                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                               "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.");
-
-    this.store.dispatch(addDog(dachshund));
-  }
-
   async transitionSections(nextSection:HTMLElement){
 
     // initially hide new section while old transitions out
@@ -179,7 +155,7 @@ class UI extends React.Component<{}>
                              path="/"
                              render={() => {
                                return <Landing links={
-                                        this.store.getState().dogs.map((dog) => {
+                                        this.props.dogs.map((dog) => {
                                            return {
                                                name: dog.name.value,
                                                path: dog.path
@@ -195,6 +171,7 @@ class UI extends React.Component<{}>
                             path="/dog/new"
                             render={({match}) => {
 
+                              // pass new empty dog object
                               const newDog:Dog = new Dog();
 
                               return <About dog={[newDog]} create={true} />
@@ -208,7 +185,8 @@ class UI extends React.Component<{}>
                              path="/dog/:id"
                              render={({match}) => {
 
-                               const thisDog:Dog = this.store.getState().dogs.filter(function(dog) {
+                               // get dog from store
+                               const thisDog:Dog = this.props.dogs.filter(function(dog) {
                                   return dog.path === match.params.id;
                                });
 
@@ -226,4 +204,8 @@ class UI extends React.Component<{}>
   }
 }
 
-export default UI;
+function mapStateToProps(state) {
+  return { dogs: state.dogs };
+}
+// wrapping with withRouter prevents issue described here - https://github.com/ReactTraining/react-router/issues/4671
+export default withRouter(connect(mapStateToProps)(UI))

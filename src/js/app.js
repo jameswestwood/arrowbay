@@ -3,6 +3,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { HashRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { dogs } from './reducers';
 
 import styles from '../css/base.css';
 import critical from '../css/critical.crit.css';
@@ -15,10 +18,14 @@ window.onload = function () {
 
   if(appContainer != null)
   {
+    const store = createStore(dogs);
+
     render(
-        <HashRouter>
-          <UI />
-        </HashRouter>,
+          <Provider store={store}>
+            <HashRouter>
+              <UI />
+            </HashRouter>
+          </Provider>,
         appContainer
       );
     }
