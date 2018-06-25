@@ -1,6 +1,6 @@
 ## Demo
 
--- link
+**[DEMO](https://jameswestwood.github.io/arrowbay/).**
 
 So far the app has only been tested on the latest version of chrome (67.0.3396.87).
 
