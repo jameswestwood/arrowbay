@@ -1,7 +1,7 @@
 @import "../../css/config.css";
 @import "../../css/libs/animate.css";
 
-.ui{
+.app{
   @mixin fadeIn 1s;
 
   width: 100%;
@@ -9,7 +9,7 @@
   min-height: 100vh;
   margin: 0 auto;
 
-  & .ui__content{
+  & .app__content{
     position: relative;
     min-height: 70vh;
     padding: 2rem 0;

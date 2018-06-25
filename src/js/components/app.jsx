@@ -132,16 +132,16 @@ class App extends React.Component<{}>
 
   render(){
     return (
-      <div className="ui">
-        <Header specifier="ui" />
-        <main className="ui__content">
+      <div className="app">
+        <Header specifier="app" />
+        <main className="app__content">
           <Route render={({ location }) => (
               <TransitionGroup component="div"
-                               className="ui__container"
+                               className="app__container"
                                appear={true}>
                 <CSSTransition key={location.pathname}
                                transitionAppear={true}
-                               classNames="ui__section-"
+                               classNames="app__section-"
                                onEnter={(el:HTMLElement) => {this.transitionSections(el);}}
                                timeout={this.transitionDuration}>
                     <Switch location={location}>
@@ -198,7 +198,7 @@ class App extends React.Component<{}>
                 </CSSTransition>
             </TransitionGroup>)}/>
         </main>
-        <Footer specifier="ui__footer" />
+        <Footer specifier="app__footer" />
       </div>
     );
   }
