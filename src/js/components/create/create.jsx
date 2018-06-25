@@ -6,7 +6,7 @@ import { connect, dispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import history from '../../history'
 
-import { Button, Input, FormGroup, Label } from 'reactstrap';
+import { Button, Input, FormGroup } from 'reactstrap';
 
 import { addDog } from '../../actions';
 //import type { Dog } from "../ui.jsx";
@@ -61,11 +61,10 @@ class Create extends React.Component<Props, State>
       <div className="create">
         <h2>Add a new dog</h2>
         <FormGroup>
-          <Label htmlFor="dog-name">Dog Breed</Label>
           <Input type="text" className="form-control" id="dog-name" placeholder="Dog Breed" value={this.state.name} onChange={(e) => this.handleChange(e)} />
           <small className="form-text text-muted">The name of the breed.</small>
         </FormGroup>
-        <Button disabled={!this.state.valid} className="actions__action" color="danger" onClick={() => this.setNewDog()}>Save</Button>
+        <Button disabled={!this.state.valid} className="actions__action" color="primary" onClick={() => this.setNewDog()}>Save</Button>
         <Button className="actions__action" color="danger" onClick={() => history.push('/')}>Cancel</Button>
       </div>
     );
