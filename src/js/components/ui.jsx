@@ -1,24 +1,24 @@
 /* @flow */
 
-import * as React from 'react';
-import { render } from 'react-dom';
-import { Switch, Route, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Transition, CSSTransition, TransitionGroup } from 'react-transition-group';
-import { addDog } from '../actions';
-import anime from 'animejs';
+import * as React from 'react'
+import { render } from 'react-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Transition, CSSTransition, TransitionGroup } from 'react-transition-group'
+import { addDog } from '../actions'
+import anime from 'animejs'
 
-import Utilities from '../classes/utilities.js';
+import Utilities from '../classes/utilities.js'
 
-import Header from './header/header.jsx';
-import Footer from './footer/footer.jsx';
+import Header from './header/header.jsx'
+import Footer from './footer/footer.jsx'
 
 // views
-import Landing from './landing/landing.jsx';
-import About from './about/about.jsx';
-import Create from './create/create.jsx';
+import Landing from './landing/landing.jsx'
+import About from './about/about.jsx'
+import Create from './create/create.jsx'
 
-import styles from './ui.css';
+import styles from './ui.css'
 
 export type Dog = {
   name:string,
@@ -167,7 +167,7 @@ class UI extends React.Component<{}>
 
                      <Route exact={true}
                             path="/dog/new"
-                            render={({match}) => {
+                            render={() => {
 
                               return <Create />
                             }
