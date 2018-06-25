@@ -2,6 +2,7 @@
 @import "./libs/caesar.css";
 @import "config.css";
 @import './libs/bootstrap.css';
+@import './libs/bootstrap.theme.css';
 @import 'bootstrap.custom.css';
 
 *, *:before, *:after {
