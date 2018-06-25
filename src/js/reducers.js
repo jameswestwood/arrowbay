@@ -1,5 +1,5 @@
 /* @flow */
-import { Dog } from './components/ui.jsx';
+import { Dog } from './components/app.jsx';
 import { ADD_DOG, EDIT_DOG } from './actions';
 
  ///////////////////////////////////////

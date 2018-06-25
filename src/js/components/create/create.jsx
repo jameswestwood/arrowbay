@@ -10,7 +10,7 @@ import { Button, Input } from 'reactstrap';
 
 import { addDog } from '../../actions';
 //import type { Dog } from "../ui.jsx";
-import { Dog } from "../ui.jsx";
+import { Dog } from "../app.jsx";
 
 type State = {
   name:string,

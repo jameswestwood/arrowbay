@@ -18,7 +18,7 @@ import Landing from './landing/landing.jsx'
 import About from './about/about.jsx'
 import Create from './create/create.jsx'
 
-import styles from './ui.css'
+import styles from './app.css'
 
 export type Dog = {
   name:string,
@@ -80,7 +80,7 @@ export function Dog(name:string,
   };
 }
 
-class UI extends React.Component<{}>
+class App extends React.Component<{}>
 {
   currentSection:HTMLElement;
   transitionDuration:number = 300;
@@ -203,4 +203,4 @@ function mapStateToProps(state) {
   return { dogs: state.dogs };
 }
 // wrapping with withRouter prevents issue described here - https://github.com/ReactTraining/react-router/issues/4671
-export default withRouter(connect(mapStateToProps)(UI))
+export default withRouter(connect(mapStateToProps)(App))

@@ -7,7 +7,7 @@ import { connect, dispatch } from 'react-redux';
 import { Button, Input } from 'reactstrap';
 
 import { editDog } from '../../actions';
-import type { Dog } from "../ui.jsx";
+import type { Dog } from "../app.jsx";
 
 type Props = {
   dog:Array<Dog>

@@ -1,4 +1,4 @@
-import type {Dog} from "../ui.jsx";
+import type {Dog} from "../app.jsx";
 
 export const ADD_DOG = 'ADD_DOG';
 export const EDIT_DOG = 'EDIT_DOG';

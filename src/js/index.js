@@ -11,7 +11,7 @@ import history from './history'
 import styles from '../css/base.css';
 import critical from '../css/critical.crit.css';
 
-import UI from './components/ui.jsx';
+import App from './components/app.jsx';
 
 window.onload = function () {
 
@@ -24,7 +24,7 @@ window.onload = function () {
     render(
           <Provider store={store}>
             <HashRouter history={history}>
-              <UI />
+              <App />
             </HashRouter>
           </Provider>,
         appContainer

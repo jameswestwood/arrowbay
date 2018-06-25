@@ -18,7 +18,7 @@ const APP_DIR = path.resolve(__dirname, './src');
 module.exports = {
   // define as many entry points as you want here
   entry: {
-    app: APP_DIR + '/js/app.js'
+    app: APP_DIR + '/js/index.js'
     // page1: APP_DIR + '/js/page1.js',
     // page2: APP_DIR + '/js/page2.js'
   },
