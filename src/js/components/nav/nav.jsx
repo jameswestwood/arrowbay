@@ -35,13 +35,11 @@ class Nav extends React.Component<Props>
 
     return (
       <nav className={"nav" + (this.props.specifier !== undefined ? ' ' + this.props.specifier : '')}>
-        <ListGroup className="nav__desktop">
+        <div className="nav__desktop list-group">
           {this.props.paths.map((path) =>
-            <ListGroupItem action>
-              <Link key={path.path} to={"/dog/" + (path.path)}>{path.name}</Link>
-            </ListGroupItem>
+            <Link className="list-group-item-action list-group-item" key={path.path} to={"/dog/" + (path.path)}>{path.name}</Link>
         )}
-        </ListGroup>
+        </div>
         <FormGroup className="nav__touch">
           <Input defaultValue="" type="select" name="select" id="exampleSelect" onChange={(e) => this.handleChange(e)}>
             <option value="" disabled hidden>Select a dog</option>
