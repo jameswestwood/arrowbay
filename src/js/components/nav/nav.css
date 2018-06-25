@@ -1,10 +1,27 @@
 @import "../../../css/config.css";
-@import "../../../css/libs/caesar.css";
 
 .nav{
-  &__link{
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+  &__desktop{
+    width:100%;
+    visibility: hidden;
+    height: 0;
+    overflow:hidden;
+  }
+
+  &__touch{
+    width:100%;
+    visibility: visible;
+  }
+
+  @media (--mobile-breakpoint){
+
+    & .nav__touch{
+      visibility: hidden;
+    }
+
+    & .nav__desktop{
+      visibility: visible;
+      height: auto;
+    }
   }
 }

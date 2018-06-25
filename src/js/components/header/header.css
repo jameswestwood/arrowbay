@@ -16,8 +16,9 @@
 
   &__logo{
     display: inline-block;
-    width:2.2rem;
-    height:1.4rem;
+    width:4rem;
+    height:2rem;
+    margin-right:0.5rem;
 
     &-path{
       stroke:var(--primary-color);
@@ -25,16 +26,12 @@
     }
   }
 
-  &__title{
-    display: inline-block;
-    margin:0 0 0 0.4rem;
-
-    @mixin display-face;
-    font-size: 1rem;
-  }
-
   &__link{
     display: flex;
     align-items: center;
+  }
+
+  &__title{
+    font-size: 2rem;
   }
 }

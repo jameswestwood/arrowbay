@@ -1,15 +1,29 @@
-@import "../../../css/content.css";
+@import "../../../css/config.css";
 
 .landing{
   display: flex;
+  flex-direction: column;
+
+  @media (--mobile-breakpoint){
+    flex-direction: row;
+  }
 
   &__nav{
     display: inline-block;
-    width:10rem;
+    width:100%;
     min-width: 10rem;
+    max-width: 20rem;
+    margin-right: 3rem;
   }
 
   &__intro{
     display: inline-block;
+  }
+
+  &__cta{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-top: 2rem;
   }
 }

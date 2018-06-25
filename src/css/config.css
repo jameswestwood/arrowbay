@@ -7,32 +7,13 @@
 
 	--horizontal-padding: 5vw;
 
-	/* colors */
 	--primary-color:#000;
 	--secondary-color:#fff;
-
-	--background-color-a:var(--secondary-color);
-	--background-color-b:var(--secondary-color);
-
-	/* states */
-	--valid-color: green;
-	--invalid-color: red;
-
-	/* links */
-	--linkColor : #35efbe;
-
-	/* type */
-	--type-color-dark: var(--secondary-color);
-	--type-color-light: var(--primary-color);
-
-	/* icons */
-	--icon-size-reg:1.3rem;
-	--icon-size-small:0.8rem;
 
 	/* media queries */
 	@custom-media --ie11-only-hack (-ms-high-contrast:none);
 	@custom-media --edge-only-hack (-ms-accelerator:true);
-	@custom-media --mobile-breakpoint (min-width:480px);
+	@custom-media --mobile-breakpoint (min-width:650px);
 
 	@define-mixin divider{
 		content: "";

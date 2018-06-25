@@ -14,7 +14,6 @@ class Footer extends React.Component<Props>
   render(){
     return (
       <footer className={"footer" + (this.props.specifier !== undefined ? ' ' + this.props.specifier : '')}>
-        MIT License
         <a href="https://github.com/jameswestwood/webpack-react-postcss-boilerplate" className="footer__icon-btn">
           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <title>GitHub</title>
