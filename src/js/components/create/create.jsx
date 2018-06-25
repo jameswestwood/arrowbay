@@ -9,7 +9,6 @@ import history from '../../history'
 import { Button, Input, FormGroup } from 'reactstrap';
 
 import { addDog } from '../../actions';
-//import type { Dog } from "../ui.jsx";
 import { Dog } from "../app.jsx";
 
 type State = {
@@ -76,7 +75,6 @@ const mapDispatchToProps = (dispatch) => {
     dispatchNewDog: (newDog) => dispatch(addDog(newDog)),
   }
 }
-
 
 export default connect(
   null,
